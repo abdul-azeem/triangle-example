@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>Triangle.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">triangle-example</a> &gt; <a href="index.source.html" class="el_package">com.triangle.example</a> &gt; <span class="el_source">Triangle.java</span></div><h1>Triangle.java</h1><pre class="source lang-java linenums">package com.triangle.example;
+
+import static com.triangle.example.TriangleType.EQUILATERAL;
+import static com.triangle.example.TriangleType.INVALID;
+import static com.triangle.example.TriangleType.ISOSCELES;
+import static com.triangle.example.TriangleType.SCALENE;
+
+/**
+ * Simple example to classification of different types of triangle.
+ * @author Abdul Azeem
+ *
+ */
+<span class="fc" id="L13">public class Triangle {</span>
+
+	public TriangleType doClassify(final int line1, final int line2, final int line3) {
+		// is valid triangle
+<span class="fc bfc" id="L17" title="All 2 branches covered.">		if (isInvalidTraingle(line1, line2, line3)) {</span>
+<span class="fc" id="L18">			return INVALID;</span>
+		}
+<span class="fc" id="L20">		int equiLinesCount = doEquiLinesCount(line1, line2, line3);</span>
+
+		// check 3 lines are identical
+<span class="fc bfc" id="L23" title="All 2 branches covered.">		if (equiLinesCount &gt; 3) {</span>
+<span class="fc" id="L24">			return EQUILATERAL;</span>
+		}
+		// check any two lines are identical
+<span class="pc bpc" id="L27" title="1 of 4 branches missed.">		if ((equiLinesCount == 1) &amp;&amp; ((line1 + line2) &gt; line3)) {</span>
+<span class="fc" id="L28">			return ISOSCELES;</span>
+<span class="pc bpc" id="L29" title="1 of 4 branches missed.">		} else if ((equiLinesCount == 2) &amp;&amp; ((line1 + line3) &gt; line2)) {</span>
+<span class="fc" id="L30">			return ISOSCELES;</span>
+<span class="pc bpc" id="L31" title="1 of 4 branches missed.">		} else if ((equiLinesCount == 3) &amp;&amp; ((line2 + line3) &gt; line1)) {</span>
+<span class="fc" id="L32">			return ISOSCELES;</span>
+		}
+		// no identical lines
+<span class="pc bpc" id="L35" title="1 of 2 branches missed.">		if (equiLinesCount == 0) {</span>
+<span class="fc" id="L36">			return SCALENE;</span>
+		}
+
+<span class="nc" id="L39">		return INVALID;</span>
+	}
+
+	private int doEquiLinesCount(int line1, int line2, int line3) {
+<span class="fc" id="L43">		int count = 0;</span>
+<span class="fc bfc" id="L44" title="All 2 branches covered.">		if (line1 == line2) {</span>
+<span class="fc" id="L45">			count = count + 1;</span>
+		}
+<span class="fc bfc" id="L47" title="All 2 branches covered.">		if (line1 == line3) {</span>
+<span class="fc" id="L48">			count = count + 2;</span>
+		}
+<span class="fc bfc" id="L50" title="All 2 branches covered.">		if (line2 == line3) {</span>
+<span class="fc" id="L51">			count = count + 3;</span>
+		}
+<span class="fc" id="L53">		return count;</span>
+	}
+
+	private boolean isInvalidTraingle(int line1, int line2, int line3) {
+<span class="fc bfc" id="L57" title="All 6 branches covered.">		boolean linesExists = (line1 &lt;= 0) || (line2 &lt;= 0) || (line3 &lt;= 0);</span>
+<span class="fc bfc" id="L58" title="All 6 branches covered.">		boolean validLines = ((line1 + line2) &lt; line3) || ((line1 + line3) &lt; line2) || ((line2 + line3) &lt; line1);</span>
+<span class="fc bfc" id="L59" title="All 4 branches covered.">		return linesExists || validLines;</span>
+	}
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.5.201505241946</span></div></body></html>
